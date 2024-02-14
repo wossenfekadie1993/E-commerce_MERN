@@ -1,0 +1,1 @@
+import Produc = require('./models/')
