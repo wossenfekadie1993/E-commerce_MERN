@@ -7,7 +7,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 
 // Getting all
-app.get('/', async (req, res) => {
+app.get('/user', async (req, res) => {
     try {
         const users = await User.find();
         res.status(200).json(users);
@@ -22,7 +22,7 @@ app.get('/user/:id', getUser, (req, res) => {
 });
 
 // Creating one
-app.post('/register', async (req, res) => {
+app.post('/user/register', async (req, res) => {
     try {
         console.log("Password:", req.body.password);
         const hashedPassword = await bcrypt.hash(req.body.password, 10);

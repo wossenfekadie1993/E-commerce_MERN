@@ -7,7 +7,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 
 // Getting all
-app.get('/', async (req, res) => {
+app.get('/user', async (req, res) => {
     try {
         const users = await User.find();
         res.status(200).json(users);

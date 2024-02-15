@@ -12,25 +12,16 @@ const db_url=process.env.DB_URL
 const app=express();
 app.use(express.json());
 app.use(cors());
-app.set('view-engine','ejs')
+app.set()
 
-
+app.get('/', (req,res)=>{
+    res.render(index.ejs')
+})
 mongoose.connect(db_url);
 const db=mongoose.connection;
 db.on("error" ,(error) => console.log(error()))
 db.once("open",()=>console.log("connection establish to database"));
 
-// home page
-app.get('/', (req,res)=>{
-    res.render('index.ejs');
-})
-
-app.get('/register', (req,res)=>{
-    res.render('signup.ejs');
-})
-app.get('/login', (req,res)=>{
-    res.render('login.ejs');
-})
 //user route
 const user=require('./routes/users')
 app.use('/user', user)

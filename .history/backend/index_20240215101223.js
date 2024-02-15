@@ -35,6 +35,8 @@ app.get('/login', (req,res)=>{
 const user=require('./routes/users')
 app.use('/user', user)
 
+
+
 //product route
 const product =require('./routes/products')
 app.use('/product',product)

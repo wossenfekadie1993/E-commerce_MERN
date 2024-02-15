@@ -1,13 +1,13 @@
 const express = require('express');
+const router = express.Router();
 const User = require('../models/users');
 const bcrypt = require('bcrypt');
-
-const app = express();
-
-app.use(express.urlencoded({ extended: true }));
+const app=express()
+app.set('view-engine', 'ejs');
+app.use(express.urlencoded({ extended: true })); // Set extended to true
 
 // Getting all
-app.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const users = await User.find();
         res.status(200).json(users);
@@ -17,30 +17,30 @@ app.get('/', async (req, res) => {
 });
 
 // Getting one
-app.get('/user/:id', getUser, (req, res) => {
+router.get('/:id', getUser, (req, res) => {
     res.json(res.user);
 });
 
 // Creating one
-app.post('/register', async (req, res) => {
+router.post('/register', async (req, res) => {
     try {
-        console.log("Password:", req.body.password);
+        console.log("Password:", req.body.password); // Add this line to check password value
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const user = new User({
             name: req.body.name,
             email: req.body.email,
-            password: hashedPassword
+            password: req.body.password
         });
         await user.save();
         res.redirect('/login');
     } catch (err) {
-        console.log("Error:", err);
+        console.log("Error:", err); // Add this line to log the error
         res.redirect('/register');
     }
 });
 
 // Updating one
-app.patch('/user/:id', getUser, async (req, res) => {
+router.patch('/:id', getUser, async (req, res) => {
     if (req.body.name != null) {
         res.user.name = req.body.name;
     }
@@ -61,7 +61,7 @@ app.patch('/user/:id', getUser, async (req, res) => {
 });
 
 // Deleting one
-app.delete('/user/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const deletedUser = await User.findByIdAndDelete(id);
@@ -89,4 +89,4 @@ async function getUser(req, res, next) {
     next();
 }
 
-module.exports = app;
+module.exports = router;
