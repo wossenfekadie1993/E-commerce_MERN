@@ -18,6 +18,7 @@
   "homepage": "https://github.com/wossenfekadie1993/E-commerce_MERN#readme",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "connect-mongo": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.3",
     "ejs": "^3.1.9",
@@ -25,6 +26,7 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.18.0",
     "jsonwebtoken": "^9.0.2",
+    "method-override": "^3.0.0",
     "mongoose": "^8.1.2",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.0.3",
